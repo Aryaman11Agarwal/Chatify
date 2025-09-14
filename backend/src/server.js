@@ -1,5 +1,7 @@
 import express from "express"
 import dotenv from "dotenv"
+import authRouter from "./routes/auth.route.js"
+import messageRouter from "./routes/message.route.js"
 
 const app=express()
 
@@ -8,17 +10,9 @@ dotenv.config();
 
 const PORT =process.env.PORT||3000;
 
-app.get("/api/auth/signup",(req,res)=>{
-    res.status(200).json({message: "Signup endpoint"})
-})
+app.use("/api/auth",authRouter)
+app.use("/api/message",messageRouter)
 
-app.get("/api/auth/login",(req,res)=>{
-    res.status(200).send("login endpoint")
-})
-
-app.get("/api/auth/logout",(req,res)=>{
-    res.status(200).send("logout endpoint")
-})
 
 app.listen(PORT,()=>{
     
